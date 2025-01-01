@@ -61,7 +61,7 @@ process_data <- function(puck, gene_list, cell_type_info, proportions = NULL, tr
 #' feeding into \code{\link{gather_results}}
 #' @export
 process_beads_batch <- function(cell_type_info, gene_list, puck, class_df = NULL, constrain = T,
-                                MAX_CORES = 2, MIN.CHANGE = 0.001, CONFIDENCE_THRESHOLD = 10, DOUBLET_THRESHOLD = 25) {
+                                MAX_CORES = 1, MIN.CHANGE = 0.001, CONFIDENCE_THRESHOLD = 10, DOUBLET_THRESHOLD = 25) {
   beads = t(as.matrix(puck@counts[gene_list,]))
   #out_file = "logs/process_beads_log.txt"
   #if (file.exists(out_file))
@@ -97,7 +97,7 @@ process_beads_batch <- function(cell_type_info, gene_list, puck, class_df = NULL
 }
 
 process_beads_multi <- function(cell_type_info, gene_list, puck, class_df = NULL, constrain = T,
-                                MAX_CORES = 2, MIN.CHANGE = 0.001, MAX.TYPES = 4, CONFIDENCE_THRESHOLD = 10, DOUBLET_THRESHOLD = 25) {
+                                MAX_CORES = 1, MIN.CHANGE = 0.001, MAX.TYPES = 4, CONFIDENCE_THRESHOLD = 10, DOUBLET_THRESHOLD = 25) {
   beads = t(as.matrix(puck@counts[gene_list,]))
   if(MAX_CORES > 1) {
     numCores = parallel::detectCores();
@@ -171,7 +171,7 @@ fitPixels <- function(RCTD, doublet_mode = "doublet") {
   }
 }
 
-decompose_batch <- function(nUMI, cell_type_means, beads, gene_list, constrain = T, OLS = F, max_cores = 2, MIN.CHANGE = 0.001) {
+decompose_batch <- function(nUMI, cell_type_means, beads, gene_list, constrain = T, OLS = F, max_cores = 1, MIN.CHANGE = 0.001) {
   #out_file = "logs/decompose_batch_log.txt"
   #if (file.exists(out_file))
   #  file.remove(out_file)
